@@ -68,6 +68,24 @@ public class FancyActivity extends AppCompatActivity {
         courseList.add("中级4");
         courseList.add("中级5");
         courseList.add("中级6");
+        courseList.add("中级1");
+        courseList.add("中级2");
+        courseList.add("中级3");
+        courseList.add("中级4");
+        courseList.add("中级5");
+        courseList.add("中级6");
+        courseList.add("中级1");
+        courseList.add("中级2");
+        courseList.add("中级3");
+        courseList.add("中级4");
+        courseList.add("中级5");
+        courseList.add("中级6");
+        courseList.add("中级1");
+        courseList.add("中级2");
+        courseList.add("中级3");
+        courseList.add("中级4");
+        courseList.add("中级5");
+        courseList.add("中级6");
 
         mShufAdapter = new HomeShufAdapter(this, courseList);
         mShufAdapter.setOnPageSelectListener(new HomeShufAdapter.OnPageSelectListener() {
