@@ -46,7 +46,10 @@ public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageCha
         View convertView;
         Log.i(TAG, "instantiateItem: " + position);
         convertView = View.inflate(context, R.layout.item_course_fancy, null);
-        convertView.setPadding(HomeShufAdapter.sWidthPadding, HomeShufAdapter.sTopPadding, HomeShufAdapter.sWidthPadding, 0);
+        RelativeLayout outRl = (RelativeLayout) convertView.findViewById(R.id.item_fancy_out_rl);
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) outRl.getLayoutParams();
+        lp.setMargins(HomeShufAdapter.sWidthPadding, HomeShufAdapter.sTopPadding, HomeShufAdapter.sWidthPadding, 0);
+
         RelativeLayout fancyRl = (RelativeLayout) convertView.findViewById(R.id.item_fancy_rl);
         if (position % 3 == 0) {
             fancyRl.setBackgroundResource(R.drawable.bg_book_blue);
@@ -83,7 +86,12 @@ public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageCha
                 int outWidthPadding = (int) ((positionOffset + 1) * sWidthPadding / 2);
                 int outTopPadding = (int) ((1 + positionOffset) * sTopPadding / 2);
                 int outBottomPadding = (int) ((1 - positionOffset) * sBottomPadding / 2);
-                viewMap.get(position - 1).setPadding(outWidthPadding, outTopPadding, outWidthPadding, outBottomPadding);
+//                viewMap.get(position - 1).setPadding(outWidthPadding, outTopPadding, outWidthPadding, outBottomPadding);
+
+                RelativeLayout outRl = (RelativeLayout) viewMap.get(position - 1).findViewById(R.id.item_fancy_out_rl);
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) outRl.getLayoutParams();
+                lp.setMargins(outWidthPadding, outTopPadding, outWidthPadding, outBottomPadding);
+
                 TextView courseNameTv = (TextView) viewMap.get(position - 1).findViewById(R.id.item_fancy_tv);
                 courseNameTv.setTextSize(12 - textSizeOffect * (positionOffset + 1) / 2);
             }
@@ -92,7 +100,12 @@ public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageCha
                 int outWidthPadding = (int) (positionOffset * sWidthPadding / 2);
                 int outTopPadding = (int) ((positionOffset) * sTopPadding / 2);
                 int outBottomPadding = (int) ((2 - positionOffset) * sBottomPadding / 2);
-                viewMap.get(position).setPadding(outWidthPadding, outTopPadding, outWidthPadding, outBottomPadding);
+//                viewMap.get(position).setPadding(outWidthPadding, outTopPadding, outWidthPadding, outBottomPadding);
+
+                RelativeLayout outRl = (RelativeLayout) viewMap.get(position).findViewById(R.id.item_fancy_out_rl);
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) outRl.getLayoutParams();
+                lp.setMargins(outWidthPadding, outTopPadding, outWidthPadding, outBottomPadding);
+
                 TextView courseNameTv = (TextView) viewMap.get(position).findViewById(R.id.item_fancy_tv);
                 courseNameTv.setTextSize(12 - textSizeOffect * positionOffset / 2);
             }
@@ -101,7 +114,12 @@ public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageCha
                 int inWidthPadding = (int) ((1 - positionOffset) * sWidthPadding / 2);
                 int inTopPadding = (int) ((1 - positionOffset) * sTopPadding / 2);
                 int inBottomPadding = (int) ((1 + positionOffset) * sBottomPadding / 2);
-                viewMap.get(position + 1).setPadding(inWidthPadding, inTopPadding, inWidthPadding, inBottomPadding);
+//                viewMap.get(position + 1).setPadding(inWidthPadding, inTopPadding, inWidthPadding, inBottomPadding);
+
+                RelativeLayout outRl = (RelativeLayout) viewMap.get(position + 1).findViewById(R.id.item_fancy_out_rl);
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) outRl.getLayoutParams();
+                lp.setMargins(inWidthPadding, inTopPadding, inWidthPadding, inBottomPadding);
+
                 TextView courseNameTv = (TextView) viewMap.get(position + 1).findViewById(R.id.item_fancy_tv);
                 courseNameTv.setTextSize(12 - textSizeOffect * (1 - positionOffset) / 2);
             }
@@ -110,7 +128,12 @@ public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageCha
                 int inWidthPadding = (int) ((2 - positionOffset) * sWidthPadding / 2);
                 int inTopPadding = (int) ((2 - positionOffset) * sTopPadding / 2);
                 int inBottomPadding = (int) ((positionOffset) * sBottomPadding / 2);
-                viewMap.get(position + 2).setPadding(inWidthPadding, inTopPadding, inWidthPadding, inBottomPadding);
+//                viewMap.get(position + 2).setPadding(inWidthPadding, inTopPadding, inWidthPadding, inBottomPadding);
+
+                RelativeLayout outRl = (RelativeLayout) viewMap.get(position + 2).findViewById(R.id.item_fancy_out_rl);
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) outRl.getLayoutParams();
+                lp.setMargins(inWidthPadding, inTopPadding, inWidthPadding, inBottomPadding);
+
                 TextView courseNameTv = (TextView) viewMap.get(position + 2).findViewById(R.id.item_fancy_tv);
                 courseNameTv.setTextSize(12 - textSizeOffect * (2 - positionOffset) / 2);
             }
