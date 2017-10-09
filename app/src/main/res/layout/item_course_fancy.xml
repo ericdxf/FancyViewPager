@@ -5,23 +5,44 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/item_fancy_rl"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/item_fancy_rl_bg"
+        android:layout_width="103dp"
+        android:layout_height="159dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_book_blue"
-        >
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_book_blue">
+
+        <TextView
+            android:id="@+id/item_fancy_tv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:gravity="center"
+            android:paddingBottom="32dp"
+            android:textSize="9sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/item_fancy_rl"
+        android:layout_width="103dp"
+        android:layout_height="159dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_book_blue">
 
         <TextView
             android:id="@+id/item_fancy_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="会计中级实务"
-            android:textSize="12sp"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:gravity="center"
             android:paddingBottom="32dp"
-            />
+            android:textSize="9sp" />
 
     </RelativeLayout>
 </RelativeLayout>

@@ -1,11 +1,10 @@
 package com.example.dxf.fancyapplication;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -15,10 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FancyActivity extends AppCompatActivity {
-
+    private static final String TAG = "FancyActivity";
     private FancyCoverFlow fancyView;
-    private CourseFancyAdapter fancyAdapter;
-    private ViewPager courseVp;
+    private ClipViewPager courseVp;
     private List<ImageView> mShufImages;
     private HomeShufAdapter mShufAdapter;
     private RelativeLayout outRl;
@@ -29,7 +27,7 @@ public class FancyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fancy);
         fancyView = (FancyCoverFlow) findViewById(R.id.choose_course_fancyCoverFlow);
         initWidget();
-        courseVp = (ViewPager) findViewById(R.id.choose_course_vp);
+        courseVp = (ClipViewPager) findViewById(R.id.choose_course_vp);
         outRl = (RelativeLayout) findViewById(R.id.rl_home_shuf);
         initVp();
     }
@@ -62,37 +60,46 @@ public class FancyActivity extends AppCompatActivity {
 //        mShufImages.add(imageView6);
 
         List<String> courseList = new ArrayList<>();
-        courseList.add("中级1");
-        courseList.add("中级2");
-        courseList.add("中级3");
-        courseList.add("中级4");
-        courseList.add("中级5");
-        courseList.add("中级6");
-        courseList.add("中级1");
-        courseList.add("中级2");
-        courseList.add("中级3");
-        courseList.add("中级4");
-        courseList.add("中级5");
-        courseList.add("中级6");
-        courseList.add("中级1");
-        courseList.add("中级2");
-        courseList.add("中级3");
-        courseList.add("中级4");
-        courseList.add("中级5");
-        courseList.add("中级6");
-        courseList.add("中级1");
-        courseList.add("中级2");
-        courseList.add("中级3");
-        courseList.add("中级4");
-        courseList.add("中级5");
-        courseList.add("中级6");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+        courseList.add("中级会计实务中级会计实务中级会计实务中级");
+
+//        courseList.add("中级1");
+//        courseList.add("中级2");
+//        courseList.add("中级3");
+//        courseList.add("中级4");
+//        courseList.add("中级5");
+//        courseList.add("中级6");
+//        courseList.add("中级1");
+//        courseList.add("中级2");
+//        courseList.add("中级3");
+//        courseList.add("中级4");
+//        courseList.add("中级5");
+//        courseList.add("中级6");
 
         mShufAdapter = new HomeShufAdapter(this, courseList);
         mShufAdapter.setOnPageSelectListener(new HomeShufAdapter.OnPageSelectListener() {
             @Override
             public void select(int position) {
-//                courseVp.bringToFront(position);
-
+                Log.i(TAG, "select: " + position);
             }
         });
 
@@ -111,52 +118,7 @@ public class FancyActivity extends AppCompatActivity {
     }
 
     public void initWidget() {
-        fancyView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
-        fancyView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        List<String> list = new ArrayList<>();
-        list.add("中级会计实务");
-        list.add("中级会计实务");
-        list.add("中级会计实务");
-        list.add("中级会计实务");
-        list.add("中级会计实务");
-        list.add("中级会计实务");
-        list.add("中级会计实务");
-        setFancyAdapter(list);
-    }
-
-    /**
-     * @date 创建时间: 2016/12/6
-     * @author XiaoFeng
-     * @Description 设置适配器显示
-     */
-    private void setFancyAdapter(List<String> list) {
-        // 设置滚动数据
-        fancyAdapter = new CourseFancyAdapter(this, fancyView, list);
-        fancyView.setAdapter(fancyAdapter);
-        fancyView.setCourseStyle();
-        // 设置fancyView循环显示
-        fancyView.setSelection(0);
-        fancyAdapter.setItemOnClick(new CourseFancyAdapter.ItemOnClick() {
-            @Override
-            public void myClick(String institutionModel) {
-
-            }
-        });
     }
 
 }

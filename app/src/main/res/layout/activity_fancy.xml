@@ -21,13 +21,15 @@
         android:layout_weight="2"
         android:clipChildren="false">
 
-        <android.support.v4.view.ViewPager
-            android:background="#ccc"
+        <com.example.dxf.fancyapplication.ClipViewPager
             android:id="@+id/choose_course_vp"
             android:layout_width="103dp"
             android:layout_height="159dp"
             android:layout_centerHorizontal="true"
-            android:clipChildren="false" />
+            android:background="#ccc"
+            android:clipChildren="false"
+            android:overScrollMode="never" />
+
     </RelativeLayout>
 
 </LinearLayout>
