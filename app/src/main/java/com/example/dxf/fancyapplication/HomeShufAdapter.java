@@ -151,10 +151,9 @@ public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageCha
 
             // 因为Offset的变化存在跳跃现象，所以要把停止移动的控件位置复原
             if (lastPosition != position) {
-                Log.i(TAG, "onPageScrolled: setpadding" + lastPosition);
                 if (position > lastPosition) {
                     // 向右滑动
-                    if (lastPosition - 1 > 0) {
+                    if (lastPosition - 1 >= 0) {
                         viewMap.get(lastPosition - 1).setPadding(sWidthPadding, sTopPadding, sWidthPadding, sBottomPadding);
                     }
                 } else {
@@ -165,22 +164,22 @@ public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageCha
                 }
                 lastPosition = position;
             }
+            Log.i(TAG, "onPageScrolled position：" + position + " lastPosition：" + lastPosition);
 
-//
-//            // 因为Offset的变化存在跳跃现象，所以要把停止移动的控件位置复原
-//            if (lastPosition != position) {
-//                Log.i(TAG, "onPageScrolled: setpadding" + lastPosition);
-//                if (position > lastPosition) {
-//                    viewMap.get(lastPosition).setPadding(sWidthPadding, sTopPadding, sWidthPadding, sBottomPadding);
-//                } else {
-//                    if (lastPosition + 1 < viewMap.size()) {
-//                        viewMap.get(lastPosition + 1).setPadding(sWidthPadding, sTopPadding, sWidthPadding, sBottomPadding);
-//                    }
-//                }
-//                lastPosition = position;
-//            }
-
-            viewMap.get((positionOffset > 0.5 ? 1 : 0) + position).bringToFront();
+            int realPosition = (positionOffset > 0.5 ? 1 : 0) + position;
+            if (realPosition - 2 >= 0) {
+                viewMap.get(realPosition - 2).bringToFront();
+            }
+            if (realPosition + 2 < viewMap.size()) {
+                viewMap.get(realPosition + 2).bringToFront();
+            }
+            if (realPosition - 1 >= 0) {
+                viewMap.get(realPosition - 1).bringToFront();
+            }
+            if (realPosition + 1 < viewMap.size()) {
+                viewMap.get(realPosition + 1).bringToFront();
+            }
+            viewMap.get(realPosition).bringToFront();
         }
     }
 
