@@ -12,13 +12,13 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-
 /**
- * 首页轮播图
- * Created by mdw on 2016/4/20.
+ * @date 创建时间: 2017/10/10
+ * @author duxiaofeng
+ * @Description 课程切换适配器
  */
-public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
-    private static final String TAG = "HomeShufAdapter";
+public class CoursePagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
+    private static final String TAG = "CoursePagerAdapter";
     public static int sWidthPadding = DimenUtils.dp2px(12);
     public static int sTopPadding = DimenUtils.dp2px(60);
     public static int sBottomPadding = DimenUtils.dp2px(32);
@@ -31,7 +31,7 @@ public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageCha
 
     private OnPageSelectListener listener;
 
-    public HomeShufAdapter(Context context, List<String> courseList) {
+    public CoursePagerAdapter(Context context, List<String> courseList) {
         this.context = context;
         this.courseList = courseList;
     }
@@ -46,7 +46,7 @@ public class HomeShufAdapter extends PagerAdapter implements ViewPager.OnPageCha
         View convertView;
         Log.i(TAG, "instantiateItem: " + position);
         convertView = View.inflate(context, R.layout.item_course_fancy, null);
-        convertView.setPadding(HomeShufAdapter.sWidthPadding, HomeShufAdapter.sTopPadding, HomeShufAdapter.sWidthPadding, 0);
+        convertView.setPadding(CoursePagerAdapter.sWidthPadding, CoursePagerAdapter.sTopPadding, CoursePagerAdapter.sWidthPadding, 0);
         RelativeLayout fancyRl = (RelativeLayout) convertView.findViewById(R.id.item_fancy_rl);
         if (position % 3 == 0) {
             fancyRl.setBackgroundResource(R.drawable.bg_book_blue);

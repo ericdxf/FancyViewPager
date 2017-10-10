@@ -7,7 +7,6 @@ import android.util.TypedValue;
  */
 public class DimenUtils {
 
-
     /**
      * dp 转 px
      * @param dp

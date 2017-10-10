@@ -6,9 +6,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -17,6 +16,7 @@ public class ClipViewPager extends ViewPager {
     private HashMap<Integer, View> viewMap = new HashMap<>();
     private float downX;
     private int currentItem;
+    private onCourseClickedListener clickedListener;
 
     public ClipViewPager(Context context) {
         super(context);
@@ -28,7 +28,7 @@ public class ClipViewPager extends ViewPager {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        HomeShufAdapter mShufAdapter = (HomeShufAdapter) getAdapter();
+        CoursePagerAdapter mShufAdapter = (CoursePagerAdapter) getAdapter();
         viewMap = mShufAdapter.getViewMap();
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
             downX = ev.getX();
@@ -43,29 +43,14 @@ public class ClipViewPager extends ViewPager {
             } else {
                 if (Math.abs(downX - ev.getX()) < 10) {
                     View view = viewOfClickOnScreen(ev);
-                    if (view != null) {
+                    if (view != null && clickedListener != null) {
                         RelativeLayout fancyRl = (RelativeLayout) view.findViewById(R.id.item_fancy_rl);
-                        MyYAnimation myYAnimation = new MyYAnimation();
-                        myYAnimation.setAnimationListener(new Animation.AnimationListener() {
-                            @Override
-                            public void onAnimationStart(Animation animation) {
-                                Log.i(TAG, "onAnimationStart: ");
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animation animation) {
-                                Log.i(TAG, "onAnimationEnd: ");
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animation animation) {
-                                Log.i(TAG, "onAnimationRepeat: ");
-                            }
-                        });
-                        fancyRl.startAnimation(myYAnimation);
+                        TextView fancyTV = (TextView) view.findViewById(R.id.item_fancy_tv);
+                        int[] location = new int[2];
+                        fancyRl.getLocationOnScreen(location);
+                        clickedListener.onCourseClicked(location[0], location[1], fancyRl.getWidth(), fancyRl.getHeight(), currentItem, fancyTV.getText().toString());
                     }
                     // 点击了当前ViewPager内部
-                    Toast.makeText(getContext(), "点击了课程", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -85,10 +70,10 @@ public class ClipViewPager extends ViewPager {
 
             Log.i(TAG, "viewOfClickOnScreen: " + i + ": " + location[0]);
             int minX = location[0];
-            int minY = getTop();
+//            int minY = getTop();
 
-            int maxX = location[0] + v.getWidth() - 50;
-            int maxY = getBottom();
+            int maxX = location[0] + v.getWidth();
+//            int maxY = getBottom();
 
             float x;
             if (ev.getX() != ev.getRawX()) {
@@ -96,13 +81,31 @@ public class ClipViewPager extends ViewPager {
             } else {
                 x = ev.getX();
             }
-            float y = ev.getY();
+//            float y = ev.getY();
 
-            if (minX != 0 && (x > minX && x < maxX) && (y > minY && y < maxY)) {
-                currentItem = i;
-                return v;
+            if (minX != 0 && (x > minX && x < maxX)) {
+                // 根据点击位置的是在左侧还是右侧，调整50的重叠部分
+                if (i < currentItem) {
+                    if (x < maxX - 50) {
+                        currentItem = i;
+                        return v;
+                    }
+                } else {
+                    if (x < maxX + 50) {
+                        currentItem = i;
+                        return v;
+                    }
+                }
             }
         }
         return null;
+    }
+
+    public interface onCourseClickedListener {
+        void onCourseClicked(int leftMargin, int rightMargin, int width, int height, int item, String name);
+    }
+
+    public void setOnCourseClickedListener(onCourseClickedListener clickedListener) {
+        this.clickedListener = clickedListener;
     }
 }  

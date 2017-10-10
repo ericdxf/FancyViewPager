@@ -1,35 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_home_shuf"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     android:orientation="vertical"
     tools:context="com.example.dxf.fancyapplication.FancyActivity">
 
-    <com.example.dxf.fancyapplication.FancyCoverFlow.FancyCoverFlow
-        android:id="@+id/choose_course_fancyCoverFlow"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#888" />
+    <com.example.dxf.fancyapplication.ClipViewPager
+        android:id="@+id/choose_course_vp"
+        android:layout_width="103dp"
+        android:layout_height="159dp"
+        android:layout_centerInParent="true"
+        android:clipChildren="false"
+        android:overScrollMode="never" />
 
-    <RelativeLayout
-        android:id="@+id/rl_home_shuf"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:clipChildren="false">
-
-        <com.example.dxf.fancyapplication.ClipViewPager
-            android:id="@+id/choose_course_vp"
-            android:layout_width="103dp"
-            android:layout_height="159dp"
-            android:layout_centerHorizontal="true"
-            android:background="#ccc"
-            android:clipChildren="false"
-            android:overScrollMode="never" />
-
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>
