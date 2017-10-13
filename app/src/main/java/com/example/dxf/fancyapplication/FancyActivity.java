@@ -78,7 +78,7 @@ public class FancyActivity extends AppCompatActivity {
 
                 final View showView = LayoutInflater.from(FancyActivity.this).inflate(R.layout.item_course, null);
                 // 建立layout属性对象
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(0, 0);
+                final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(0, 0);
                 // 给副本View设置位置，与目标View重合
                 params.leftMargin = leftMargin;
                 params.topMargin = topMargin - location[1];
@@ -86,7 +86,14 @@ public class FancyActivity extends AppCompatActivity {
                 params.width = width;
                 params.height = height;
                 showView.setLayoutParams(params);
+
+                final ImageView courseBgImg = new ImageView(FancyActivity.this);
+                courseBgImg.setImageResource(R.drawable.bg_course);
+                courseBgImg.setScaleType(ImageView.ScaleType.FIT_XY);
+                courseBgImg.setLayoutParams(params);
+                courseBgImg.setPadding(10, 2, 6, 25);
                 // 加入父View中
+                outRl.addView(courseBgImg, params);
                 outRl.addView(showView, params);
 
                 RelativeLayout fancyRl = (RelativeLayout) showView.findViewById(R.id.item_fancy_rl);
@@ -112,6 +119,7 @@ public class FancyActivity extends AppCompatActivity {
                     public void onAnimationEnd(Animation animation) {
                         Log.i(TAG, "onAnimationEnd: ");
                         outRl.removeView(showView);
+                        outRl.removeView(courseBgImg);
                     }
 
                     @Override
